@@ -1,12 +1,13 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
-import User from "../models/userModel.mjs";
+import User from "../models/userModel";
+import { IUserRequest } from "../../types";
 
-const protect = asyncHandler(async (req, res, next) => {
+const protect = asyncHandler(async (req: IUserRequest, res, next) => {
 	const authHeader = req.headers.authorization;
 	const token = authHeader?.split(" ")[1];
 
-	if (!authHeader || !authHeader.startsWith("Bearer") | !token) {
+	if (!authHeader || !authHeader.startsWith("Bearer") || !token) {
 		res.status(401);
 		throw new Error("Not authorized");
 	}

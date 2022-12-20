@@ -1,10 +1,11 @@
 import asyncHandler from "express-async-handler";
-import Goal from "../models/goalModel.mjs";
+import { IUserRequest } from "../../types";
+import Goal from "../models/goalModel";
 
 // @desc Get goals
 // @route GET /api/goals
 // @access Private
-const getGoals = asyncHandler(async (req, res) => {
+const getGoals = asyncHandler(async (req: IUserRequest, res) => {
 	const goals = await Goal.find({ user: req.user });
 	res.json(goals);
 });
@@ -12,7 +13,7 @@ const getGoals = asyncHandler(async (req, res) => {
 // @desc Set goal
 // @route POST /api/goals
 // @access Private
-const setGoal = asyncHandler(async (req, res) => {
+const setGoal = asyncHandler(async (req: IUserRequest, res) => {
 	if (!req.body.text) {
 		res.status(400);
 		throw new Error("Please add a text field");
@@ -24,7 +25,7 @@ const setGoal = asyncHandler(async (req, res) => {
 // @desc Update goal
 // @route PUT /api/goals/:id
 // @access Private
-const updateGoal = asyncHandler(async (req, res) => {
+const updateGoal = asyncHandler(async (req: IUserRequest, res) => {
 	const goal = await Goal.findById(req.params.id);
 	if (!goal) {
 		res.status(400);
@@ -41,7 +42,7 @@ const updateGoal = asyncHandler(async (req, res) => {
 // @desc Delete goal
 // @route DELETE /api/goals/:id
 // @access Private
-const deleteGoal = asyncHandler(async (req, res) => {
+const deleteGoal = asyncHandler(async (req: IUserRequest, res) => {
 	const goal = await Goal.findById(req.params.id);
 	if (!goal) {
 		res.status(400);

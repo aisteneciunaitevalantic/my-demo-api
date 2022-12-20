@@ -1,10 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import { errorHandler } from "./middleware/errorMiddleware.mjs";
-import colors from "colors";
-import connectDb from "./config/db.mjs";
-import goalRoutes from "./routes/goalRoutes.mjs";
-import userRoutes from "./routes/userRoutes.mjs";
+import { errorHandler } from "./middleware/errorMiddleware";
+import connectDb from "./config/db";
+import goalRoutes from "./routes/goalRoutes";
+import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
 

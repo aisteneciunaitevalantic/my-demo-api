@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import asyncHandler from "express-async-handler";
-import User from "../models/userModel.mjs";
+import User from "../models/userModel";
+import { IUserRequest } from "../../types";
 const salt = bcrypt.genSaltSync(10);
 
-const generateToken = (id) => {
+const generateToken = (id: string) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
@@ -12,7 +13,7 @@ const generateToken = (id) => {
 // @route POST /api/users
 // @access Public
 
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req: IUserRequest, res) => {
 	const { name, email, password } = req.body;
 	if (!name || !email || !password) {
 		res.status(400);
@@ -74,7 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/me
 // @access Private
 
-const getMe = asyncHandler(async (req, res) => {
+const getMe = asyncHandler(async (req: IUserRequest, res) => {
 	res.send(req.user);
 });
 
