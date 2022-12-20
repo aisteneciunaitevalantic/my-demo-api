@@ -1,9 +1,6 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
+import { IGoal } from "../types/goalTypes";
 
-interface IGoal {
-	user: Types.ObjectId;
-	text: string;
-}
 const goalSchema = new Schema<IGoal>(
 	{
 		user: {

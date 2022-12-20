@@ -8,6 +8,7 @@ const protect = asyncHandler(async (req: IUserRequest, res, next) => {
 	const token = authHeader?.split(" ")[1];
 
 	if (!authHeader || !authHeader.startsWith("Bearer") || !token) {
+		// #swagger.responses[401] = { schema: { $ref: '#/definitions/Error' }}
 		res.status(401);
 		throw new Error("Not authorized");
 	}
