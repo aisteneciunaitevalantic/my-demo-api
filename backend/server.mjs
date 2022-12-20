@@ -1,9 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
-import goalRoutes from "./routes/goalRoutes.mjs";
 import { errorHandler } from "./middleware/errorMiddleware.mjs";
 import colors from "colors";
 import connectDb from "./config/db.mjs";
+import goalRoutes from "./routes/goalRoutes.mjs";
+import userRoutes from "./routes/userRoutes.mjs";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT;
 
 app.use("/api/goals", goalRoutes);
+app.use("/api/users", userRoutes);
 app.use(errorHandler);
 
 app.listen(port, () => {
